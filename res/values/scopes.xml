@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="scope">
+        <item>服装</item>
+        <item>3c家电</item>
+        <item>美容化妆、健身养身</item>
+        <item>品牌直销</item>
+        <item>办公用品印刷</item>
+        <item>家居建材家具</item>
+        <item>商业服务、成人教育</item>
+        <item>生活服务</item>
+        <item>箱包皮具服饰</item>
+        <item>食品饮料烟酒零售</item>
+        <item>文化体育休闲玩意</item>
+        <item>杂货超市</item>
+        <item>餐饮娱乐、休闲度假</item>
+        <item>汽车、自行车</item>
+        <item>珠宝工艺、古董花鸟</item>
+        <item>彩票充值票务旅游</item>
+        <item>药店及医疗服务</item>
+        <item>物流、租赁</item>
+        <item>公益类</item>
+        
+    </array>
+   
+    <array name="papers">
+        <item>身份证</item>
+        <item>军官证</item>
+        <item>护照</item>
+        <item>回乡证</item>
+        <item>台胞证</item>
+        <item>警官证</item>
+        <item>士兵证</item>
+        <item>其他证件类型</item>
+        
+    </array>
+    
+    <array name="amount">
+        <item>50元</item>
+        <item>100元</item>
+        <item>200元</item>
+        <item>300元</item>
+        
+    </array>
+</resources>

@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zhengfu"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:background="@drawable/btn_back"
+            android:onClick="backAction" />
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/calculator_title" />
+        
+        <Button
+            android:id="@+id/btn_complete"
+            android:layout_width="70dip"
+            android:layout_height="35dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:text="完成"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dip"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:background="@drawable/btn"
+             />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dip"
+        android:cursorVisible="false"
+        android:layout_marginRight="10dip"
+        android:gravity="right"
+        android:editable="false"
+        android:textColor="#000000"
+        android:textSize="45sp"
+        android:text="0"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:background="@color/clear"
+        android:textStyle="bold" >
+    </EditText>
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="15dip"
+        android:background="@color/gray_1"/>
+    <TableLayout
+        android:id="@+id/tablelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10" >
+
+        <LinearLayout
+            android:id="@+id/linearlayout02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/buttonc"
+                android:layout_width="50dip"
+                android:layout_height="40dip"
+                android:layout_marginRight="0.5dip"
+                android:layout_weight="2"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/shan"
+                android:textColor="@color/orange"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/buttonce"
+                android:layout_width="50dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="0.5dip"
+                android:layout_weight="1"
+                android:text="@string/shanchu"
+                android:textColor="@color/gray_1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+            
+        </LinearLayout>
+
+        <TableRow
+            android:id="@+id/row0"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/one"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/two"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/three"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button01"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/calculator_symbol_btn_selector"
+                android:text="@string/jia"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/fore"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/five"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/six"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button02"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/calculator_symbol_btn_selector"
+                android:text="@string/jian"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/seven"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/eight"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/nine"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button03"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/calculator_symbol_btn_selector"
+                android:text="@string/cheng"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/zero"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button06"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/dihao"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button05"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/dengyu"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/button04"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="@drawable/calculator_symbol_btn_selector"
+                android:text="@string/chu"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+        </TableRow>
+
+        <LinearLayout
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/zheng"
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/zhengfu"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/pingfang"
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/ping"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+
+            <Button
+                android:id="@+id/kaifang"
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/inputmoney_btn_selector"
+                android:text="@string/kai"
+                android:textColor="@color/gray_1"
+                android:textSize="30sp"
+                android:textStyle="bold" >
+            </Button>
+        </LinearLayout>
+    </TableLayout>
+
+</LinearLayout>

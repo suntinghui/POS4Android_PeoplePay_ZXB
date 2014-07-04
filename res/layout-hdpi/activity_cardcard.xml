@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/forgetpwd_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/cardcard_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_in_name" />
+
+                <EditText
+                    android:id="@+id/et_in_name"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="18dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_in_name_h"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_out_name" />
+
+                <EditText
+                    android:id="@+id/et_out_name"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="18dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_out_name_h"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_papers_type" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="70dip"
+                    android:background="@drawable/selectbg"
+                    android:drawSelectorOnTop="true"
+                    android:paddingLeft="8dip"
+                    android:prompt="@string/cardcard_papers_type_tips" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_papers_num" />
+
+                <EditText
+                    android:id="@+id/et_papers_num"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="70dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_papers_num_h"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_papers_card_num" />
+
+                <EditText
+                    android:id="@+id/et_card_num"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="35dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_papers_card_num_h"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_papers_amount" />
+
+                <EditText
+                    android:id="@+id/et_amount"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="70dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_papers_amount_h"
+                    android:inputType="number"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="12dip" >
+
+                <TextView
+                    style="@style/black_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/cardcard_papers_phone" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    style="@style/black_17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="70dip"
+                    android:background="@drawable/bg_borderbox"
+                    android:hint="@string/cardcard_papers_phone_h"
+                    android:inputType="number"
+                    android:paddingLeft="8dip"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/gray_14"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:gravity="center"
+                android:text="@string/cardcard_papers_tips" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dip"
+                android:background="@color/gray" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                style="@style/white_20"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:layout_marginTop="30dip"
+                android:background="@drawable/btn"
+                android:text="确 定" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

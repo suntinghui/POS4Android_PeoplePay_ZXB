@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/inputmoeny_title" />
+        
+        <Button android:id="@+id/btn_calculator"
+            android:layout_width="35dip"
+            android:layout_height="35dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/icon_calculator"/>
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_swip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbarLayout"
+        android:layout_marginTop="30dip"
+        android:background="@drawable/inputmoney_blue_bg" >
+
+        <TextView
+            android:id="@+id/tv_show_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dip"
+            android:background="@null"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_tip"
+            style="@style/white_17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_show_money"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:text="@string/inputmoeny_click_swipe"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/inputmoney_right_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_swip"
+        >
+        <Button
+        android:id="@+id/btn_cash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dip"
+        android:background="@color/clear"
+        android:text="@string/inputmoeny_cash"
+        android:textColor="@drawable/text_blue_gray"
+        android:textSize="18sp"
+        android:layout_centerInParent="true"
+         />
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dip"
+        android:layout_marginTop="20dip"
+        android:background="@color/gray"
+        android:orientation="vertical"
+        android:padding="0.7dip" >
+
+        <GridView
+            android:id="@+id/gridveiw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
+            android:horizontalSpacing="0dip"
+            android:numColumns="3"
+            android:verticalSpacing="0dip" />
+    </LinearLayout>
+
+</RelativeLayout>

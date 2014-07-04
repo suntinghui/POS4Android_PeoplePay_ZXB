@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/forgetpwd_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/my_account_title" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:paddingLeft="25dip"
+            android:paddingRight="20dip" >
+
+            <TextView
+                style="@style/black_17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="@string/my_account_balance" />
+
+            <TextView
+                android:id="@+id/tv_balance"
+                style="@style/orange_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dip"
+                android:background="@null" 
+                android:text="￥0.0"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="10dip"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="25dip"
+            android:paddingRight="20dip"
+            android:layout_marginTop="12dip" >
+
+            <TextView
+                style="@style/black_17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:text="@string/my_account_amount" />
+
+            <EditText
+                android:id="@+id/et_amount"
+                style="@style/black_17"
+                android:layout_width="160dip"
+                android:layout_height="40dip"
+                android:layout_centerVertical="true"
+                android:paddingLeft="6dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="18dip"
+                android:background="@drawable/bg_borderbox"
+                android:hint="@string/my_account_amount_h"
+                android:inputType="number"
+                android:layout_alignParentRight="true"
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dip"
+            android:background="@color/gray" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:layout_marginTop="25dip"
+        android:background="@drawable/bg_borderbox" >
+
+        <Button
+            android:id="@+id/btn_nomal"
+            style="@style/black_17"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dip"
+            android:text="@string/my_account_nomal"
+            android:background="@drawable/inputmoney_btn_selector" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/image_arrow_right" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/bg_borderbox" >
+
+        <Button
+            android:id="@+id/btn_fast"
+            style="@style/black_17"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:text="@string/my_account_fast"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dip"
+            android:background="@drawable/inputmoney_btn_selector" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/image_arrow_right" />
+    </RelativeLayout>
+
+
+</LinearLayout>

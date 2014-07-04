@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zxb.view.SliderContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.zxb"
+    android:id="@+id/dateSliderContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <com.zxb.view.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="com.zxb.view.YearLabeler"
+        app:labelerFormat="%tY"
+        app:childWidth="150dp"/>
+    <com.zxb.view.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="com.zxb.view.MonthLabeler"
+        app:labelerFormat="%tB"
+        app:childWidth="200dp"/>
+    
+    <include layout="@layout/dialogbuttons"/>
+    
+</com.zxb.view.SliderContainer>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/forgetpwd_bg">
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/upload_title" />
+    </RelativeLayout>
+
+    
+	<LinearLayout android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginLeft="25dip"
+	    android:layout_marginRight="25dip"
+	    android:layout_marginTop="20dip">
+	    
+	    <ImageView android:id="@+id/iv_one"
+	        android:layout_width="120dip"
+	        android:layout_height="130dip"
+	        android:background="@drawable/add_card_icon_one"/>
+	    
+	    <ImageView android:id="@+id/iv_two"
+	        android:layout_width="120dip"
+	        android:layout_height="130dip"
+	        android:layout_marginLeft="40dip"
+	        android:background="@drawable/add_card_icon_two"/>
+	</LinearLayout>
+
+	<LinearLayout android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginLeft="25dip"
+	    android:layout_marginRight="25dip"
+	    android:layout_marginTop="20dip">
+	    
+	    <ImageView android:id="@+id/iv_three"
+	        android:layout_width="120dip"
+	        android:layout_height="130dip"
+	        android:background="@drawable/add_card_icon"/>
+	    
+	    <ImageView android:id="@+id/iv_four"
+	        android:layout_width="120dip"
+	        android:layout_height="130dip"
+	        android:layout_marginLeft="40dip"
+	        android:background="@drawable/add_user_icon"/>
+	</LinearLayout>
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/white_20"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dip"
+        android:layout_marginRight="25dip"
+        android:layout_marginTop="45dip"
+        android:background="@drawable/btn"
+        android:text="下一步" />
+
+</LinearLayout>

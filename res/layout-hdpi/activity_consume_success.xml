@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/topbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/nav_bar_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/white_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="交易成功" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/centerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbarLayout"
+        android:layout_marginTop="40dip"
+        android:orientation="vertical" >
+
+        <!-- end -->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/transaction_success" />
+
+        <TextView
+            style="@style/black_18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="40dip"
+            android:gravity="center"
+            android:text="交易成功" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dip"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                style="@style/checkBoxSelectTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="是否发送交易小票"
+                android:background="@null"
+                android:textColor="@drawable/text_orange_blue" />
+
+            <EditText
+                android:id="@+id/phoneText"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginRight="30dip"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/bg_borderbox"
+                android:hint="请输入手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="10dip"
+                android:singleLine="true" 
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/btn"
+        android:text="完   成"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>

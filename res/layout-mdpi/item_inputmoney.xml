@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 九宫格每一格的布局 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
+     >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_gravity="center_horizontal"
+        android:padding="0.7dip"
+         >
+
+        <Button
+            android:id="@+id/btn_num"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="@drawable/inputmoney_btn_selector"
+            android:textColor="@color/gray_1"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+    </FrameLayout>
+
+</LinearLayout>
