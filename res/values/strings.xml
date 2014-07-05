@@ -141,6 +141,9 @@
     <string name="drawmoney_pwd_h">请输入登录密码</string>
     <string name="check_ticket">查看交易小票</string>
     <string name="dateSliderTitle">选择日期</string>
+    <string name="input_pwd">请输入密码</string>
+    <string name="pwdKeyboardTips">众付宝为保护您的密码安全，请您使用定制的键盘输入密码。密码键盘每次随机打乱按键顺序，全面保护您的账户安全。</string>
+    
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>

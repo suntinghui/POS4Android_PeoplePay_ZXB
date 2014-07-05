@@ -253,6 +253,15 @@
             </intent-filter>
         </activity>
         
+          <activity android:name=".activity.PwdInputActivity"  android:exported="false" 
+            android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan">
+        	<intent-filter >
+                <action android:name="com.zxb.PwdInputActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         
          <activity android:name=".activity.ConsumeSuccessActivity"  android:exported="false" 
             android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan">
         	<intent-filter >
