@@ -38,6 +38,7 @@ import com.zxb.qpos.ThreadDeviceID;
 import com.zxb.qpos.ThreadEncPwd;
 import com.zxb.qpos.ThreadSwip;
 import com.zxb.qpos.ThreadUpDataKey;
+import com.zxb.qpos.ZXBPOS;
 import com.zxb.util.ByteUtil;
 import com.zxb.util.DateUtil;
 import com.zxb.util.StringUtil;
@@ -195,6 +196,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case ErrorCode.SUCCESS:
+					ZXBPOS.checkBattery();
+					
 					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
 					pid = tid;
 
@@ -290,6 +293,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case ErrorCode.SUCCESS:
+					ZXBPOS.checkBattery();
+					
 					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
 					pid = tid;
 

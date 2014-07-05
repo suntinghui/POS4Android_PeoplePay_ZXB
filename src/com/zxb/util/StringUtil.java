@@ -54,6 +54,11 @@ public class StringUtil {
 			return defaultValue;
 		}
 	}
+	
+	public static boolean isDouble(String str) {
+		Pattern pattern = Pattern.compile("^[0-9]+\\.{0,1}[0-9]{0,2}$/g");
+		return pattern.matcher(str).matches();
+	}
 
 	public static double Currency2Double(String str) {
 		if (str == null)
@@ -404,7 +409,7 @@ public class StringUtil {
 	}
 	
 	public static boolean checkIdCard(String idCard) {
-        String regex = "\\d{15}|\\d{18}";
+        String regex = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
         return Pattern.matches(regex,idCard);
     }
      

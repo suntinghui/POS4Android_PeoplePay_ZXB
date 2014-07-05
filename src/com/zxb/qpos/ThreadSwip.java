@@ -1,17 +1,10 @@
 package com.zxb.qpos;
 
-import java.util.HashMap;
-
-import com.fncat.xswipe.controller.ErrorCode;
-import com.zxb.client.AppDataCenter;
-import com.zxb.client.Constants;
-import com.zxb.util.StringUtil;
-
 import android.content.Context;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.zxb.client.AppDataCenter;
 
 /**
  * 刷卡+6位密码
@@ -34,7 +27,7 @@ public class ThreadSwip extends Thread {
 		
 		int r = ZXBPOS.getPOSManage().requestSwipeCard(AppDataCenter.encryptFactor, AppDataCenter.Adc);
 		
-		ZXBPOS.handSwipData(mHandler, r);
+		ZXBPOS.handData(mHandler, r);
 	}
 	
 }

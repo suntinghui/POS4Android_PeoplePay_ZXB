@@ -17,9 +17,6 @@ public class ZXBPOS {
 
 	private static POSManage manage = null;
 	
-	private static Handler handler = null;
-	private static int returnCode = 0;
-
 	public static POSManage getPOSManage() {
 		if (null == manage) {
 			manage = POSManage.getInstance();
@@ -31,9 +28,6 @@ public class ZXBPOS {
 	}
 	
 	public static void handData(Handler mHandler, Object obj, int returnCode) {
-		handler = mHandler;
-		returnCode = returnCode;
-		
 		if (mHandler != null){
 			Message message = mHandler.obtainMessage();
 			message.obj = obj;
@@ -43,9 +37,6 @@ public class ZXBPOS {
 	}
 	
 	public static void handData(Handler mHandler, int returnCode) {
-		handler = mHandler;
-		returnCode = returnCode;
-		
 		if (mHandler != null){
 			Message message = mHandler.obtainMessage();
 			message.obj = ErrorMsg.getErrorMsg().get(returnCode);
@@ -54,10 +45,6 @@ public class ZXBPOS {
 		}
 	}
 	
-	public static void handSwipData(Handler mHandler, int returnCode) {
-		handler = mHandler;
-		returnCode = returnCode;
-	}
 	
 	public static void broadcastUpdate(final String action) {
 		try{
@@ -76,10 +63,7 @@ public class ZXBPOS {
 			
 			Log.e("***", "取得encTrack..."+ByteUtil.byte2hex(encTrack));
 			
-			Message message = handler.obtainMessage();
-			message.obj = ErrorMsg.getErrorMsg().get(returnCode);
-			message.what = returnCode;
-			handler.sendMessage(message);
+			// TODO
 		}
 
 		@Override
@@ -110,5 +94,18 @@ public class ZXBPOS {
 		}
 		
 	};
+	
+	public static void checkBattery(){
+		if (AppDataCenter.Adc[0] < 3) {
+			String prompt = "刷卡器电量过低！！！";
+			if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-I")) { // I型
+				prompt = "刷卡器电量过低，请及时更换电池！";
+			} else if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-S")) { // // S型
+				prompt = "刷卡器电量过低，请及时充电！";
+			}
+				
+			Toast.makeText(BaseActivity.getTopActivity(), prompt, Toast.LENGTH_SHORT).show();
+		}
+	}
 
 }
