@@ -27,55 +27,15 @@
             android:layout_centerInParent="true"
             android:text="检测设备" />
 
-        <Button
-            android:id="@+id/bluetooth_btn"
-            android:layout_width="40dip"
-            android:layout_height="40dip"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dip"
-            android:background="@drawable/bluetooth" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/layout_search"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/check_divice_bg_circle" >
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
-
-            <ImageView
-                android:id="@+id/iv_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/check_divice_bg_blue" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/check_divice_bg_dot" />
-
-            <ImageView
-                android:id="@+id/iv_device"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/check_divice_bg_divice" />
-        </FrameLayout>
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_swip"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:paddingTop="100dip"
-        android:visibility="gone" >
+        >
 
         <ImageView
             android:id="@+id/iv_card"
