@@ -45,14 +45,11 @@ import com.zxb.util.StringUtil;
 
 public class SearchAndSwipeActivity extends BaseActivity implements OnClickListener {
 
-	private Button bluetoothBtn = null;
 	private Button backBtn = null;
 	private TextView titleView = null;
 
 	private Intent intent = null;
-
-	private RelativeLayout layout_search;
-	private RelativeLayout layout_swip;
+	private ImageView iv_device;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,30 +62,29 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		backBtn = (Button) this.findViewById(R.id.btn_back);
 		backBtn.setOnClickListener(this);
 
-		bluetoothBtn = (Button) this.findViewById(R.id.bluetooth_btn);
-		bluetoothBtn.setOnClickListener(this);
-		bluetoothBtn.setVisibility(View.GONE);
-
 		titleView = (TextView) this.findViewById(R.id.titleView);
-		titleView.setText("检测设备");
+		titleView.setText("请刷卡");
 
-		layout_search = (RelativeLayout) findViewById(R.id.layout_search);
-		layout_swip = (RelativeLayout) findViewById(R.id.layout_swip);
+		ImageView iv_card = (ImageView) findViewById(R.id.iv_card);
+		Animation myAnimation0 = AnimationUtils.loadAnimation(SearchAndSwipeActivity.this, R.anim.swip_card_anim);
+		LinearInterpolator lir0 = new LinearInterpolator();
+		myAnimation0.setInterpolator(lir0);
+		iv_card.startAnimation(myAnimation0);
+		
+		iv_device = (ImageView) findViewById(R.id.iv_device);
+		
 
-		ImageView iv_blue = (ImageView) findViewById(R.id.iv_blue);
-		Animation myAnimation = AnimationUtils.loadAnimation(this, R.anim.check_device_anim);
-		LinearInterpolator lir = new LinearInterpolator();
-		myAnimation.setInterpolator(lir);
-		iv_blue.startAnimation(myAnimation);
-
-		ImageView iv_device = (ImageView) findViewById(R.id.iv_device);
-		Animation myAnimation1 = AnimationUtils.loadAnimation(this, R.anim.swip_scale_anim);
-		LinearInterpolator lir1 = new LinearInterpolator();
-		myAnimation1.setInterpolator(lir1);
-		iv_device.startAnimation(myAnimation1);
-
+		iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+		
 		intent = this.getIntent();
-
+		String type = intent.getStringExtra("type");
+		if(type != null){
+			if(type.equals("I")){
+				iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+			}else if(type.equals("S")){
+				iv_device.setImageResource(R.drawable.ip_shuaka_pos_s);
+			}
+		}
 		doAction();
 	}
 
@@ -145,15 +141,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 
 			} else if (Constants.ACTION_QPOS_STARTSWIPE.equals(action)) {
 
-				bluetoothBtn.setVisibility(View.GONE);
 				titleView.setText("请刷卡");
-				layout_search.setVisibility(View.GONE);
-				layout_swip.setVisibility(View.VISIBLE);
-				ImageView iv_card = (ImageView) findViewById(R.id.iv_card);
-				Animation myAnimation0 = AnimationUtils.loadAnimation(SearchAndSwipeActivity.this, R.anim.swip_card_anim);
-				LinearInterpolator lir0 = new LinearInterpolator();
-				myAnimation0.setInterpolator(lir0);
-				iv_card.startAnimation(myAnimation0);
+				
 
 			} else if (Constants.ACTION_QPOS_SWIPEDONE.equals(action)) {
 
