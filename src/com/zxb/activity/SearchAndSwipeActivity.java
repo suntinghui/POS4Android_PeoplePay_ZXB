@@ -74,7 +74,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		iv_device = (ImageView) findViewById(R.id.iv_device);
 		
 
-		iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+		iv_device.setImageResource(R.drawable.ip_shuaka_pos_s);
 		
 		intent = this.getIntent();
 		String type = intent.getStringExtra("type");
