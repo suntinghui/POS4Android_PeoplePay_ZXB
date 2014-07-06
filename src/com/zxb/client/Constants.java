@@ -31,9 +31,9 @@ public class Constants {
 	public static final String kFIRSTLOGIN = "FirstLogin";
 	public static final String kGESTRUECLOSE = "GestureClose";
 
-	public static final String ACTION_QPOS_CANCEL = "ACTION_QPOS_CANCEL";
-	public static final String ACTION_QPOS_STARTSWIPE = "ACTION_QPOS_STARTSWIPE";
-	public static final String ACTION_QPOS_SWIPEDONE = "ACTION_QPOS_SWIPEDONE";
+	public static final String ACTION_ZXB_STARTSWIP = "ACTION_ZXB_STARTSWIP";
+	public static final String ACTION_ZXB_SUCCESS = "ACTION_ZXB_SUCCESS";
+	public static final String ACTION_ZXB_SWIPFINISHED = "ACTION_ZXB_SWIPFINISHED";
 
 	public static final String SIGNIMAGESPATH = APPFILEPATH + "/signImages/";
 	public static final String kTRACEAUDITNUM = "kTRACEAUDITNUM";

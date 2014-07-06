@@ -29,7 +29,7 @@ public class ThreadCalcMac extends Thread {
 	public void run() {
 		try {
 
-			Log.e("***", "计算mac...");
+			Log.e("***", "计算mac..." + macStr);
 
 			int r = ZXBPOS.getPOSManage().GetMAC(macStr, AppDataCenter.MAC);
 

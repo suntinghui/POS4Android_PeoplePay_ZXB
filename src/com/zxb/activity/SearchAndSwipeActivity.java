@@ -56,6 +56,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_search_swipe);
+		
+		intent = this.getIntent();
 
 		this.registerReceiver(mQPOSUpdateReceiver, makeUpdateIntentFilter());
 
@@ -63,9 +65,10 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		backBtn.setOnClickListener(this);
 		
 		layout_swip = (RelativeLayout) findViewById(R.id.layout_swip);
+		layout_swip.setVisibility(View.GONE);
 
 		titleView = (TextView) this.findViewById(R.id.titleView);
-		titleView.setText("请刷卡");
+		titleView.setText("请稍候");
 
 		ImageView iv_card = (ImageView) findViewById(R.id.iv_card);
 		Animation myAnimation0 = AnimationUtils.loadAnimation(SearchAndSwipeActivity.this, R.anim.swip_card_anim);
@@ -84,9 +87,18 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		String nowDate = DateUtil.getSystemMonthDay();
 
 		if (!preDate.equals(nowDate)) {
+			titleView.setText("正在签到");
+			layout_swip.setVisibility(View.GONE);
+			this.showDialog(BaseActivity.PROGRESS_DIALOG, "正在签到，请稍候...");
+			
 			new Sign().doAction();
 
 		} else {
+			titleView.setText("请稍候");
+			layout_swip.setVisibility(View.GONE);
+			this.showDialog(BaseActivity.PROGRESS_DIALOG, "正在启动刷卡器...");
+			
+			
 			int type = intent.getIntExtra("TYPE", 0);
 
 			if (type == TransferRequestTag.Consume) {
@@ -128,24 +140,24 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		public void onReceive(Context context, Intent intent) {
 			final String action = intent.getAction();
 
-			if (Constants.ACTION_QPOS_CANCEL.equals(action)) {
+			if (Constants.ACTION_ZXB_STARTSWIP.equals(action)) {
 
-			} else if (Constants.ACTION_QPOS_STARTSWIPE.equals(action)) {
-
-				titleView.setText("请刷卡");
+			} else if (Constants.ACTION_ZXB_SUCCESS.equals(action)){
+				SearchAndSwipeActivity.this.showDialog(BaseActivity.PROGRESS_DIALOG, "刷卡成功，正在解析磁道信息");
 				
-
-			} else if (Constants.ACTION_QPOS_SWIPEDONE.equals(action)) {
-
+			} else if (Constants.ACTION_ZXB_SWIPFINISHED.equals(action)) {
+				// 刷卡成功后启动输入密码
+				SearchAndSwipeActivity.this.intent.setClass(SearchAndSwipeActivity.this, PwdInputActivity.class);
+				BaseActivity.getTopActivity().startActivityForResult(SearchAndSwipeActivity.this.intent, 0);
 			}
 		}
 	};
 
 	public IntentFilter makeUpdateIntentFilter() {
 		final IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(Constants.ACTION_QPOS_CANCEL);
-		intentFilter.addAction(Constants.ACTION_QPOS_STARTSWIPE);
-		intentFilter.addAction(Constants.ACTION_QPOS_SWIPEDONE);
+		intentFilter.addAction(Constants.ACTION_ZXB_STARTSWIP);
+		intentFilter.addAction(Constants.ACTION_ZXB_SUCCESS);
+		intentFilter.addAction(Constants.ACTION_ZXB_SWIPFINISHED);
 		return intentFilter;
 	}
 
@@ -277,6 +289,9 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 					
 					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
 					pid = tid;
+					
+					intent.putExtra("TID", tid);
+					intent.putExtra("PID", pid);
 
 					new ThreadSwip(swipeHandler, SearchAndSwipeActivity.this).start();
 
@@ -290,7 +305,9 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case ErrorCode.SUCCESS:
-					new ThreadCalcMac(calcMacHandler, SearchAndSwipeActivity.this, getExtraString()).start();;
+					titleView.setText("请刷卡");
+					layout_swip.setVisibility(View.VISIBLE);
+					SearchAndSwipeActivity.this.hideDialog(PROGRESS_DIALOG);
 
 					break;
 
@@ -302,97 +319,6 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			}
 		};
 		
-		private Handler calcMacHandler =  new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					
-					// TODO  密码：
-					new ThreadEncPwd(encPwdHandler, SearchAndSwipeActivity.this, "111111").start();
-
-					break;
-				}
-			}
-		};
-		
-		private Handler encPwdHandler =  new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					transfer();
-					break;
-				}
-			}
-		};
-
-		private String getExtraString() {
-			StringBuffer sb = new StringBuffer();
-			sb.append(intent.getStringExtra("TRANCODE"));
-			sb.append(intent.getStringExtra("CTXNAT"));
-			sb.append(intent.getStringExtra("TSEQNO"));
-			sb.append(intent.getStringExtra("TTXNTM"));
-			sb.append(intent.getStringExtra("TTXNDT"));
-			sb.append(pid); 
-
-			return sb.toString();
-		}
-
-		private void transfer() {
-			HashMap<String, Object> tempMap = new HashMap<String, Object>();
-			tempMap.put("TRANCODE", intent.getStringExtra("TRANCODE"));
-			tempMap.put("PHONENUMBER", intent.getStringExtra("PHONENUMBER")); // 手机号
-			tempMap.put("TERMINALNUMBER", tid); // 终端号
-			tempMap.put("PCSIM", intent.getStringExtra("PCSIM"));
-			tempMap.put("TRACK", ByteUtil.byte2hex(AppDataCenter.encTrack));
-			tempMap.put("TSEQNO", intent.getStringExtra("TSEQNO")); // 终端流水号
-			tempMap.put("CTXNAT", intent.getStringExtra("CTXNAT")); // 消费金额
-			tempMap.put("TPINBLK", AppDataCenter.PIN_Block[0]); // 支付密码
-			tempMap.put("CRDNO", intent.getStringExtra("CRDNO")); // 卡号
-			tempMap.put("CHECKX", intent.getStringExtra("CHECKX")); // 横坐标
-			tempMap.put("CHECKY", intent.getStringExtra("CHECKY")); // 纵坐标
-			tempMap.put("TTXNTM", intent.getStringExtra("TTXNTM")); // 交易时间
-			tempMap.put("TTXNDT", intent.getStringExtra("TTXNDT")); // 交易日期
-			tempMap.put("PSAMCARDNO", pid); // PSAM卡号 "UN201410000046"
-			tempMap.put("MAC", AppDataCenter.MAC[0].substring(0, 8)); // MAC
-
-			LKHttpRequest req = new LKHttpRequest(TransferRequestTag.Consume, tempMap, transferHandler());
-
-			new LKHttpRequestQueue().addHttpRequest(req).executeQueue("正在交易请稍候...", new LKHttpRequestQueueDone() {
-
-				@Override
-				public void onComplete() {
-					super.onComplete();
-
-				}
-
-			});
-		}
-
-		private LKAsyncHttpResponseHandler transferHandler() {
-			return new LKAsyncHttpResponseHandler() {
-
-				@Override
-				public void successAction(Object obj) {
-					@SuppressWarnings("unchecked")
-					HashMap<String, String> map = (HashMap<String, String>) obj;
-
-					if (map.get("RSPCOD").equals("00")) {
-						Intent intent0 = new Intent(SearchAndSwipeActivity.this, HandSignActivity.class);
-						intent0.putExtra("AMOUNT", intent.getStringExtra("CTXNAT"));
-						intent0.putExtra("LOGNO", map.get("LOGNO"));
-						startActivityForResult(intent0, 0);
-
-					} else {
-						gotoTradeFailureActivity(map.get("RSPMSG"));
-					}
-
-				}
-
-			};
-		}
-
 	}
 
 	// 手机充值

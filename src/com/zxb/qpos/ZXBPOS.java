@@ -12,6 +12,7 @@ import com.zxb.activity.BaseActivity;
 import com.zxb.activity.PwdInputActivity;
 import com.zxb.client.AppDataCenter;
 import com.zxb.client.AppInit;
+import com.zxb.client.Constants;
 import com.zxb.util.ByteUtil;
 
 public class ZXBPOS {
@@ -54,9 +55,7 @@ public class ZXBPOS {
 			
 			Log.e("***", "取得encTrack..."+ByteUtil.byte2hex(encTrack));
 			
-			// 刷卡成功后启动输入密码
-			Intent intent = new Intent(BaseActivity.getTopActivity(), PwdInputActivity.class);
-			BaseActivity.getTopActivity().startActivityForResult(intent, 0);
+			ZXBPOS.broadcastUpdate(Constants.ACTION_ZXB_SWIPFINISHED);
 		}
 
 		@Override
@@ -69,6 +68,8 @@ public class ZXBPOS {
 			AppDataCenter.cardNo = cardNo;
 			
 			Log.e("***", "取得card no..."+cardNo);
+			
+			ZXBPOS.broadcastUpdate(Constants.ACTION_ZXB_SUCCESS);
 		}
 
 		@Override
