@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,6 +49,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 
 	private Intent intent = null;
 	private ImageView iv_device;
+	private RelativeLayout layout_swip;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 
 		backBtn = (Button) this.findViewById(R.id.btn_back);
 		backBtn.setOnClickListener(this);
+		
+		layout_swip = (RelativeLayout) findViewById(R.id.layout_swip);
 
 		titleView = (TextView) this.findViewById(R.id.titleView);
 		titleView.setText("请刷卡");
