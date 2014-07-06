@@ -89,14 +89,14 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		if (!preDate.equals(nowDate)) {
 			titleView.setText("正在签到");
 			layout_swip.setVisibility(View.GONE);
-			this.showDialog(BaseActivity.PROGRESS_DIALOG, "正在签到，请稍候...");
+			this.showDialog(BaseActivity.PROGRESS_DIALOG_NO_CANCEL, "正在签到，请稍候...");
 			
 			new Sign().doAction();
 
 		} else {
 			titleView.setText("请稍候");
 			layout_swip.setVisibility(View.GONE);
-			this.showDialog(BaseActivity.PROGRESS_DIALOG, "正在启动刷卡器...");
+			this.showDialog(BaseActivity.PROGRESS_DIALOG_NO_CANCEL, "正在启动刷卡器...");
 			
 			
 			int type = intent.getIntExtra("TYPE", 0);
@@ -143,7 +143,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			if (Constants.ACTION_ZXB_STARTSWIP.equals(action)) {
 
 			} else if (Constants.ACTION_ZXB_SUCCESS.equals(action)){
-				SearchAndSwipeActivity.this.showDialog(BaseActivity.PROGRESS_DIALOG, "刷卡成功，正在解析磁道信息");
+				SearchAndSwipeActivity.this.showDialog(BaseActivity.PROGRESS_DIALOG_NO_CANCEL, "刷卡成功，正在解析磁道信息");
 				
 			} else if (Constants.ACTION_ZXB_SWIPFINISHED.equals(action)) {
 				// 刷卡成功后启动输入密码
@@ -206,8 +206,6 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		};
 
 		private void signAction() {
-			Toast.makeText(SearchAndSwipeActivity.this, "正在签到请稍候...", Toast.LENGTH_LONG).show();
-
 			HashMap<String, Object> tempMap = new HashMap<String, Object>();
 			tempMap.put("TRANCODE", "199020");
 			tempMap.put("PHONENUMBER", ApplicationEnvironment.getInstance().getPreferences(SearchAndSwipeActivity.this).getString(Constants.kUSERNAME, "")); // 手机号

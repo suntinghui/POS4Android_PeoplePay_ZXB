@@ -665,8 +665,9 @@ public class TransferListActivity extends BaseActivity implements OnClickListene
     	switch (id) {
         case MONTHYEARDATESELECTOR_ID:
             return new MonthYearDateSlider(this,mMonthYearSetListener,c);
+            
         case PROGRESS_DIALOG:
-			this.showProgressDialog();
+			this.showProgressDialog(true);
 			break;
 
 		case MODAL_DIALOG:
