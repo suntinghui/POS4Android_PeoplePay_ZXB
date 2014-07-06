@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_card"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dip"
-            android:background="@drawable/ip_shuaka_pos" />
+            android:layout_marginTop="26dip"
+            />
     </RelativeLayout>
 
 </LinearLayout>
