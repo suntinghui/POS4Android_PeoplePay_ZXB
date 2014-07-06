@@ -2,7 +2,6 @@ package com.zxb.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,8 +9,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -30,7 +27,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fncat.xswipe.controller.ErrorCode;
 import com.zxb.R;
 import com.zxb.client.AppDataCenter;
 import com.zxb.client.ApplicationEnvironment;
@@ -40,10 +36,6 @@ import com.zxb.network.LKAsyncHttpResponseHandler;
 import com.zxb.network.LKHttpRequest;
 import com.zxb.network.LKHttpRequestQueue;
 import com.zxb.network.LKHttpRequestQueueDone;
-import com.zxb.qpos.ThreadCalcMac;
-import com.zxb.qpos.ThreadDeviceID;
-import com.zxb.qpos.ThreadDeviceIdAndSwip;
-import com.zxb.qpos.ThreadSwip;
 import com.zxb.util.DateUtil;
 import com.zxb.util.StringUtil;
 import com.zxb.view.LKAlertDialog;

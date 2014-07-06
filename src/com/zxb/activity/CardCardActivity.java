@@ -110,30 +110,28 @@ public class CardCardActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void cardCardAction(){
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map.put("TRANCODE", "708101");
-		map.put("SELLTEL_B", ApplicationEnvironment.getInstance().getPreferences(this).getString(Constants.kUSERNAME, ""));
-		map.put("CARDNO1_B", et_card_num.getText().toString());//接收转账卡号
-		map.put("INCARDNAM_B", et_in_name.getText().toString());
-		map.put("OUTCARDNAM_B", et_out_name.getText().toString());
-		map.put("OUT_IDTYP_B", scopeId[positon]);
-		map.put("OUT_IDTYPNAM_B", scope[positon]);
-		map.put("OUT_IDCARD_B", et_papers_num.getText().toString());
-		
-		map.put("phoneNumber_B", et_phone.getText().toString());//接收信息手机号
-		map.put("TXNAMT_B", StringUtil.amount2String(String.format("%1$.2f", Double.valueOf(et_amount.getText().toString()))));//交易金额
-		map.put("POSTYPE_B", "1");//POSTYPE_B   1 普通刷卡器 2 小刷卡器
-		map.put("CHECKX_B", "0.0");//当前经度
-		map.put("CHECKY_B", "0.0");//当前纬度
-		
-		map.put("TSeqNo_B", AppDataCenter.getTraceAuditNum());
-		map.put("TTxnTm_B", DateUtil.getSystemTime());
-		map.put("TTxnDt_B", DateUtil.getSystemMonthDay());
-		
 		Intent intent = new Intent(CardCardActivity.this, SearchAndSwipeActivity.class);
+		
+		intent.putExtra("TRANCODE", "708101");
+		intent.putExtra("SELLTEL_B", ApplicationEnvironment.getInstance().getPreferences(this).getString(Constants.kUSERNAME, ""));
+		intent.putExtra("CARDNO1_B", et_card_num.getText().toString());//接收转账卡号
+		intent.putExtra("INCARDNAM_B", et_in_name.getText().toString());
+		intent.putExtra("OUTCARDNAM_B", et_out_name.getText().toString());
+		intent.putExtra("OUT_IDTYP_B", scopeId[positon]);
+		intent.putExtra("OUT_IDTYPNAM_B", scope[positon]);
+		intent.putExtra("OUT_IDCARD_B", et_papers_num.getText().toString());
+		
+		intent.putExtra("phoneNumber_B", et_phone.getText().toString());//接收信息手机号
+		intent.putExtra("TXNAMT_B", StringUtil.amount2String(String.format("%1$.2f", Double.valueOf(et_amount.getText().toString()))));//交易金额
+		intent.putExtra("POSTYPE_B", "1");//POSTYPE_B   1 普通刷卡器 2 小刷卡器
+		intent.putExtra("CHECKX_B", "0.0");//当前经度
+		intent.putExtra("CHECKY_B", "0.0");//当前纬度
+		
+		intent.putExtra("TSeqNo_B", AppDataCenter.getTraceAuditNum());
+		intent.putExtra("TTxnTm_B", DateUtil.getSystemTime());
+		intent.putExtra("TTxnDt_B", DateUtil.getSystemMonthDay());
+		
 		intent.putExtra("TYPE", TransferRequestTag.CardCard);
-		intent.putExtra("map", map);
 		startActivityForResult(intent, 101);
 	}
 

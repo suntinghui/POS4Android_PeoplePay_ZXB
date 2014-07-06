@@ -94,7 +94,7 @@ public class ZXBPOS {
 			String prompt = "刷卡器电量过低！！！";
 			if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-I")) { // I型
 				prompt = "刷卡器电量过低，请及时更换电池！";
-			} else if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-S")) { // // S型
+			} else if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-S")) { // S型
 				prompt = "刷卡器电量过低，请及时充电！";
 			}
 				

@@ -50,7 +50,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 	private Intent intent = null;
 	private ImageView iv_device;
 	private RelativeLayout layout_swip;
-
+	private TextView tv_tips;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +63,9 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 
 		backBtn = (Button) this.findViewById(R.id.btn_back);
 		backBtn.setOnClickListener(this);
+		
+		tv_tips = (TextView) findViewById(R.id.tv_tips);
+		tv_tips.setVisibility(View.GONE);
 		
 		layout_swip = (RelativeLayout) findViewById(R.id.layout_swip);
 		layout_swip.setVisibility(View.GONE);
@@ -77,7 +80,6 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		iv_card.startAnimation(myAnimation0);
 		
 		iv_device = (ImageView) findViewById(R.id.iv_device);
-		iv_device.setImageResource(R.drawable.ip_shuaka_pos_s);
 		
 		doAction();
 	}
@@ -99,20 +101,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			this.showDialog(BaseActivity.PROGRESS_DIALOG_NO_CANCEL, "正在启动刷卡器...");
 			
 			
-			int type = intent.getIntExtra("TYPE", 0);
+			new ConsumeAction().doAction();
 
-			if (type == TransferRequestTag.Consume) {
-				new ConsumeAction().doAction();
-
-			} else if (type == TransferRequestTag.PhoneRecharge) {
-				new PhoneRechargeAction().doAction();
-				
-			} else if (type == TransferRequestTag.CardCard) {
-				new CardCardAction().doAction();
-				
-			} else if (type == TransferRequestTag.CreditCard) {
-				new CreditCardAction().doAction();
-			}
 		}
 	}
 
@@ -143,7 +133,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			if (Constants.ACTION_ZXB_STARTSWIP.equals(action)) {
 
 			} else if (Constants.ACTION_ZXB_SUCCESS.equals(action)){
-				SearchAndSwipeActivity.this.showDialog(BaseActivity.PROGRESS_DIALOG_NO_CANCEL, "刷卡成功，正在解析磁道信息");
+				tv_tips.setVisibility(View.VISIBLE);
 				
 			} else if (Constants.ACTION_ZXB_SWIPFINISHED.equals(action)) {
 				// 刷卡成功后启动输入密码
@@ -290,6 +280,12 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 					
 					intent.putExtra("TID", tid);
 					intent.putExtra("PID", pid);
+					
+					if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-I")) { // I型
+						iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+					}else if (AppDataCenter.DevTypes[0].contains("ZFT-ZXB-S")) { // S型
+						iv_device.setImageResource(R.drawable.ip_shuaka_pos_s);	
+					}
 
 					new ThreadSwip(swipeHandler, SearchAndSwipeActivity.this).start();
 
@@ -317,363 +313,6 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 			}
 		};
 		
-	}
-
-	// 手机充值
-	class PhoneRechargeAction {
-		private String tid = "";
-		private String pid = "";
-
-		public void doAction() {
-			new ThreadDeviceID(getDeviceIDHandler, SearchAndSwipeActivity.this).start();
-		}
-
-		private Handler getDeviceIDHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-					tid = map.get("TID");
-					pid = map.get("PID");
-
-					HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-					String amountStr = StringUtil.String2AmountFloat4QPOS(intentMap.get("TXNAMT_B")) + "";
-
-					// TODO
-					//new ThreadSwip_SixPass(swipeHandler, SearchAndSwipeActivity.this, amountStr, getExtraString()).start();
-
-					break;
-				}
-			}
-		};
-
-		private Handler swipeHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-
-					transfer(map);
-
-					break;
-
-				default:
-					Toast.makeText(SearchAndSwipeActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-					SearchAndSwipeActivity.this.finish();
-					break;
-				}
-			}
-		};
-
-		private String getExtraString() {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			StringBuffer sb = new StringBuffer();
-			sb.append(intentMap.get("TRANCODE"));
-			sb.append(intentMap.get("TXNAMT_B"));
-			sb.append(intentMap.get("TSeqNo_B"));
-			sb.append(intentMap.get("TTxnTm_B"));
-			sb.append(intentMap.get("TTxnDt_B"));
-			sb.append(StringUtil.asciiToHex(pid.replace("UN", ""))); // UN201410000046->201410000046
-
-			return sb.toString();
-		}
-
-		private void transfer(HashMap<String, String> map) {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			HashMap<String, Object> tempMap = new HashMap<String, Object>();
-			tempMap.put("TRANCODE", intentMap.get("TRANCODE"));
-			tempMap.put("SELLTEL_B", intentMap.get("SELLTEL_B")); // 消费撤销唯一凭证
-			
-			tempMap.put("phoneNumber_B", intentMap.get("phoneNumber_B"));// 接收信息手机号
-			tempMap.put("Track2_B", map.get("CARD"));
-			tempMap.put("CRDNOJLN_B", map.get("PIN")); // 支付密码???
-			tempMap.put("TXNAMT_B", intentMap.get("TXNAMT_B"));
-			tempMap.put("TSeqNo_B", intentMap.get("TSeqNo_B"));
-			tempMap.put("TTxnTm_B", intentMap.get("TTxnTm_B"));
-			tempMap.put("TTxnDt_B", intentMap.get("TTxnDt_B"));
-			
-			tempMap.put("POSTYPE_B", intentMap.get("POSTYPE_B"));
-//			tempMap.put("RAND_B", "");
-			tempMap.put("CHECKX_B", intentMap.get("CHECKX_B"));
-			tempMap.put("CHECKY_B", intentMap.get("CHECKY_B"));
-			tempMap.put("TERMINALNUMBER_B", pid);
-			tempMap.put("MAC_B", map.get("MAC")); // MAC
-
-			LKHttpRequest req = new LKHttpRequest(TransferRequestTag.PhoneRecharge, tempMap, transferHandler());
-
-			new LKHttpRequestQueue().addHttpRequest(req).executeQueue("正在交易，请稍候...", new LKHttpRequestQueueDone() {
-
-				@Override
-				public void onComplete() {
-					super.onComplete();
-
-				}
-
-			});
-		}
-
-		private LKAsyncHttpResponseHandler transferHandler() {
-			return new LKAsyncHttpResponseHandler() {
-
-				@Override
-				public void successAction(Object obj) {
-					@SuppressWarnings("unchecked")
-					HashMap<String, String> map = (HashMap<String, String>) obj;
-					if (map.get("RSPCOD") != null && map.get("RSPCOD").equals("00")) {
-						Intent intent = new Intent(SearchAndSwipeActivity.this, TradeSuccessActivity.class);
-						intent.putExtra("tips", "充值成功");
-						startActivityForResult(intent, 102);
-
-					} else {
-						gotoTradeFailureActivity(map.get("RSPMSG"));
-					}
-				}
-
-			};
-		}
-
-	}
-
-	// 卡卡转账
-	class CardCardAction {
-		private String tid = "";
-		private String pid = "";
-
-		public void doAction() {
-			new ThreadDeviceID(getDeviceIDHandler, SearchAndSwipeActivity.this).start();
-		}
-
-		private Handler getDeviceIDHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-					tid = map.get("TID");
-					pid = map.get("PID");
-					HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-					String amountStr = StringUtil.String2AmountFloat4QPOS(intentMap.get("TXNAMT_B")) + "";
-
-					// TODO
-					//new ThreadSwip_SixPass(swipeHandler, SearchAndSwipeActivity.this, amountStr, getExtraString()).start();
-
-					break;
-				}
-			}
-		};
-
-		private Handler swipeHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-
-					transfer(map);
-
-					break;
-
-				default:
-					Toast.makeText(SearchAndSwipeActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-					SearchAndSwipeActivity.this.finish();
-					break;
-				}
-			}
-		};
-
-		private String getExtraString() {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			StringBuffer sb = new StringBuffer();
-			sb.append(intentMap.get("TRANCODE"));
-			sb.append(intentMap.get("TXNAMT_B"));
-			sb.append(intentMap.get("TSeqNo_B"));
-			sb.append(intentMap.get("TTxnTm_B"));
-			sb.append(intentMap.get("TTxnDt_B"));
-			sb.append(StringUtil.asciiToHex(pid.replace("UN", ""))); // UN201410000046->201410000046
-
-			return sb.toString();
-		}
-
-		private void transfer(HashMap<String, String> map) {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			HashMap<String, Object> tempMap = new HashMap<String, Object>();
-			tempMap.put("TRANCODE", intentMap.get("TRANCODE"));
-			tempMap.put("SELLTEL_B", intentMap.get("SELLTEL_B")); // 消费撤销唯一凭证
-			tempMap.put("CRDNO1_B", intentMap.get("CARDNO1_B"));// 信用卡卡号
-			
-			tempMap.put("INCARDNAM_B", intentMap.get("INCARDNAM_B"));
-			tempMap.put("OUTCARDNAM_B", intentMap.get("OUTCARDNAM_B"));
-			tempMap.put("OUT_IDTYP_B", intentMap.get("OUT_IDTYP_B"));
-			tempMap.put("OUT_IDTYPNAM_B", intentMap.get("OUT_IDTYPNAM_B"));
-			tempMap.put("OUT_IDCARD_B", intentMap.get("OUT_IDCARD_B"));
-			
-			tempMap.put("phoneNumber_B", intentMap.get("phoneNumber_B"));// 接收信息手机号
-			tempMap.put("Track2_B", map.get("CARD"));
-			tempMap.put("CRDNOJLN_B", map.get("PIN")); // 支付密码???
-			tempMap.put("TXNAMT_B", intentMap.get("TXNAMT_B"));
-			tempMap.put("TSeqNo_B", intentMap.get("TSeqNo_B"));
-			tempMap.put("TTxnTm_B", intentMap.get("TTxnTm_B"));
-			tempMap.put("TTxnDt_B", intentMap.get("TTxnDt_B"));
-			
-			tempMap.put("POSTYPE_B", intentMap.get("POSTYPE_B"));
-			tempMap.put("RAND_B", "");
-			tempMap.put("CHECKX_B", intentMap.get("CHECKX_B"));
-			tempMap.put("CHECKY_B", intentMap.get("CHECKY_B"));
-			tempMap.put("TERMINALNUMBER_B", pid); // PSAM卡号 "UN201410000046"
-			tempMap.put("MAC_B", map.get("MAC")); // MAC
-
-			LKHttpRequest req = new LKHttpRequest(TransferRequestTag.CardCard, tempMap, transferHandler());
-
-			new LKHttpRequestQueue().addHttpRequest(req).executeQueue("正在交易，请稍候...", new LKHttpRequestQueueDone() {
-
-				@Override
-				public void onComplete() {
-					super.onComplete();
-
-				}
-
-			});
-		}
-
-		private LKAsyncHttpResponseHandler transferHandler() {
-			return new LKAsyncHttpResponseHandler() {
-
-				@Override
-				public void successAction(Object obj) {
-					@SuppressWarnings("unchecked")
-					HashMap<String, String> map = (HashMap<String, String>) obj;
-					if (map.get("RSPCOD").equals("00")) {
-						Intent intent = new Intent(SearchAndSwipeActivity.this, TradeSuccessActivity.class);
-						intent.putExtra("tips", "转账成功");
-						startActivityForResult(intent, 101);
-
-					} else {
-						gotoTradeFailureActivity(map.get("RSPMSG"));
-					}
-				}
-
-			};
-		}
-
-	}
-
-	// 信用卡还款
-	class CreditCardAction {
-		private String tid = "";
-		private String pid = "";
-
-		public void doAction() {
-			new ThreadDeviceID(getDeviceIDHandler, SearchAndSwipeActivity.this).start();
-		}
-
-		private Handler getDeviceIDHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-					tid = map.get("TID");
-					pid = map.get("PID");
-
-					HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-					String amountStr = StringUtil.String2AmountFloat4QPOS(intentMap.get("TXNAMT_B")) + "";
-
-					// TODO
-					//new ThreadSwip_SixPass(swipeHandler, SearchAndSwipeActivity.this, amountStr, getExtraString()).start();
-
-					break;
-				}
-			}
-		};
-
-		private Handler swipeHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case ErrorCode.SUCCESS:
-					HashMap<String, String> map = (HashMap<String, String>) msg.obj;
-
-					transfer(map);
-
-					break;
-
-				default:
-					Toast.makeText(SearchAndSwipeActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-					SearchAndSwipeActivity.this.finish();
-					break;
-				}
-			}
-		};
-
-		private String getExtraString() {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			StringBuffer sb = new StringBuffer();
-			sb.append(intentMap.get("TRANCODE"));
-			sb.append(intentMap.get("TXNAMT_B"));
-			sb.append(intentMap.get("TSeqNo_B"));
-			sb.append(intentMap.get("TTxnTm_B"));
-			sb.append(intentMap.get("TTxnDt_B"));
-			sb.append(StringUtil.asciiToHex(pid.replace("UN", ""))); // UN201410000046->201410000046
-
-			return sb.toString();
-		}
-
-		private void transfer(HashMap<String, String> map) {
-			HashMap<String, String> intentMap = (HashMap<String, String>) intent.getSerializableExtra("map");
-			HashMap<String, Object> tempMap = new HashMap<String, Object>();
-			tempMap.put("TRANCODE", intentMap.get("TRANCODE"));
-			tempMap.put("SELLTEL_B", intentMap.get("SELLTEL_B")); // 消费撤销唯一凭证
-			tempMap.put("CRDNO1_B", intentMap.get("CARDNO1_B"));// 信用卡卡号
-			
-			tempMap.put("phoneNumber_B", intentMap.get("phoneNumber_B"));// 接收信息手机号
-			tempMap.put("Track2_B", map.get("CARD"));
-			tempMap.put("CRDNOJLN_B", map.get("PIN")); // 支付密码???
-			tempMap.put("TXNAMT_B", intentMap.get("TXNAMT_B"));
-			tempMap.put("TSeqNo_B", intentMap.get("TSeqNo_B"));
-			tempMap.put("TTxnTm_B", intentMap.get("TTxnTm_B"));
-			tempMap.put("TTxnDt_B", intentMap.get("TTxnDt_B"));
-			
-			tempMap.put("POSTYPE_B", intentMap.get("POSTYPE_B"));
-			tempMap.put("CHECKX_B", intentMap.get("CHECKX_B"));
-			tempMap.put("CHECKY_B", intentMap.get("CHECKY_B"));
-			tempMap.put("TERMINALNUMBER_B", pid);
-			tempMap.put("MAC_B", map.get("MAC")); // MAC
-
-			LKHttpRequest req = new LKHttpRequest(TransferRequestTag.CreditCard, tempMap, transferHandler());
-
-			new LKHttpRequestQueue().addHttpRequest(req).executeQueue("正在交易，请稍候...", new LKHttpRequestQueueDone() {
-
-				@Override
-				public void onComplete() {
-					super.onComplete();
-
-				}
-
-			});
-		}
-
-		private LKAsyncHttpResponseHandler transferHandler() {
-			return new LKAsyncHttpResponseHandler() {
-
-				@Override
-				public void successAction(Object obj) {
-					@SuppressWarnings("unchecked")
-					HashMap<String, String> map = (HashMap<String, String>) obj;
-					if (map.get("RSPCOD") != null && map.get("RSPCOD").equals("00")) {
-						Intent intent = new Intent(SearchAndSwipeActivity.this, TradeSuccessActivity.class);
-						intent.putExtra("tips", "还款成功");
-						startActivityForResult(intent, 100);
-
-					} else {
-						gotoTradeFailureActivity(map.get("RSPMSG"));
-					}
-				}
-
-			};
-		}
-
 	}
 
 	@Override

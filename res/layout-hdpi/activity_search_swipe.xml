@@ -34,7 +34,7 @@
         android:visibility="gone"
         android:id="@+id/layout_swip"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="100dip"
         >
 
@@ -54,5 +54,14 @@
             android:layout_marginTop="24dip"
             />
     </RelativeLayout>
+    
+    <TextView android:id="@+id/tv_tips"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/black_18"
+        android:text="刷卡成功，正在解析磁道数据..."
+        android:gravity="center"
+        android:layout_marginTop="25dip"
+        android:visibility="gone"/>
 
 </LinearLayout>
