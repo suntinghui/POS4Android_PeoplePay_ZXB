@@ -49,7 +49,7 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 	private TextView titleView = null;
 
 	private Intent intent = null;
-
+	private ImageView iv_device;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +70,21 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		LinearInterpolator lir0 = new LinearInterpolator();
 		myAnimation0.setInterpolator(lir0);
 		iv_card.startAnimation(myAnimation0);
+		
+		iv_device = (ImageView) findViewById(R.id.iv_device);
+		
 
-
+		iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+		
 		intent = this.getIntent();
-
+		String type = intent.getStringExtra("type");
+		if(type != null){
+			if(type.equals("I")){
+				iv_device.setImageResource(R.drawable.ip_shuaka_pos_i);
+			}else if(type.equals("S")){
+				iv_device.setImageResource(R.drawable.ip_shuaka_pos_s);
+			}
+		}
 		doAction();
 	}
 
