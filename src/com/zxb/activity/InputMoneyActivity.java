@@ -42,6 +42,7 @@ import com.zxb.network.LKHttpRequestQueue;
 import com.zxb.network.LKHttpRequestQueueDone;
 import com.zxb.qpos.ThreadCalcMac;
 import com.zxb.qpos.ThreadDeviceID;
+import com.zxb.qpos.ThreadDeviceIdAndSwip;
 import com.zxb.qpos.ThreadSwip;
 import com.zxb.util.DateUtil;
 import com.zxb.util.StringUtil;
@@ -303,7 +304,7 @@ public class InputMoneyActivity extends BaseActivity {
 	};
 
 	private void startSwip(){
-		new ThreadDeviceID(swipHandler, this).start();
+		new ThreadDeviceIdAndSwip(swipHandler, this).start();
 	}
 	
 	private Handler swipHandler = new Handler(){
