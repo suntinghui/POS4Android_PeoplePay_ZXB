@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.fncat.xswipe.controller.POSManage;
 import com.fncat.xswipe.controller.StatusListener;
 import com.zxb.activity.BaseActivity;
+import com.zxb.activity.PwdInputActivity;
 import com.zxb.client.AppDataCenter;
 import com.zxb.client.AppInit;
 import com.zxb.util.ByteUtil;
@@ -27,15 +28,6 @@ public class ZXBPOS {
 		return manage;
 	}
 	
-	public static void handData(Handler mHandler, Object obj, int returnCode) {
-		if (mHandler != null){
-			Message message = mHandler.obtainMessage();
-			message.obj = obj;
-			message.what = returnCode;
-			mHandler.sendMessage(message);
-		}
-	}
-	
 	public static void handData(Handler mHandler, int returnCode) {
 		if (mHandler != null){
 			Message message = mHandler.obtainMessage();
@@ -44,7 +36,6 @@ public class ZXBPOS {
 			mHandler.sendMessage(message);
 		}
 	}
-	
 	
 	public static void broadcastUpdate(final String action) {
 		try{
@@ -63,7 +54,9 @@ public class ZXBPOS {
 			
 			Log.e("***", "取得encTrack..."+ByteUtil.byte2hex(encTrack));
 			
-			// TODO
+			// 刷卡成功后启动输入密码
+			Intent intent = new Intent(BaseActivity.getTopActivity(), PwdInputActivity.class);
+			BaseActivity.getTopActivity().startActivityForResult(intent, 0);
 		}
 
 		@Override

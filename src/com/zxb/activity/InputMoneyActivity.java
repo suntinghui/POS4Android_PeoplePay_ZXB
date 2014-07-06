@@ -195,7 +195,7 @@ public class InputMoneyActivity extends BaseActivity {
 					toast.show();
 
 				} else {
-					startSwip();
+					transfer();
 				}
 
 			} else if (arg0.getId() == R.id.btn_cash) { // 现金记账
@@ -303,25 +303,6 @@ public class InputMoneyActivity extends BaseActivity {
 
 	};
 
-	private void startSwip(){
-		new ThreadDeviceIdAndSwip(swipHandler, this).start();
-	}
-	
-	private Handler swipHandler = new Handler(){
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case ErrorCode.SUCCESS:
-				transfer();
-				break;
-
-			default:
-				Toast.makeText(InputMoneyActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-				break;
-			}
-		}
-	};
-	
 	private void transfer(){
 		Intent intent = new Intent(InputMoneyActivity.this, SearchAndSwipeActivity.class);
 
