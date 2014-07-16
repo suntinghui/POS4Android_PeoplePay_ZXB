@@ -46,7 +46,7 @@ public abstract class LKAsyncHttpResponseHandler extends AsyncHttpResponseHandle
 		super.onSuccess(aesContent);
 		
 		Object obj;
-		if(request.getMethodTag() != TransferRequestTag.UpLoadImage){
+		if(request.getMethodTag() != TransferRequestTag.UpLoadImage && request.getMethodTag() != TransferRequestTag.UpdateVersion){
 			if (null == aesContent || aesContent.length() == 0 ){
 				BaseActivity.getTopActivity().showDialog(BaseActivity.MODAL_DIALOG, "对不起，系统异常，请您重新操作。");
 				return;

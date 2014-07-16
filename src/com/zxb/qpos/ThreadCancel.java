@@ -1,5 +1,6 @@
 package com.zxb.qpos;
 
+import cn.com.fmsh.util.FM_Bytes;
 import android.content.Context;
 import android.os.Handler;
 
@@ -26,7 +27,6 @@ public class ThreadCancel extends Thread {
 			int resultCode = ZXBPOS.getPOSManage().SwiperCardCancel();
 			
 			ZXBPOS.handData(mHandler, resultCode);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

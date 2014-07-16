@@ -20,6 +20,7 @@ import com.zxb.model.Bank;
 import com.zxb.model.CashModel;
 import com.zxb.model.CityModel;
 import com.zxb.model.Province;
+import com.zxb.model.RateModel;
 import com.zxb.model.TradeModel;
 import com.zxb.util.StringUtil;
 
@@ -49,7 +50,10 @@ public class ParseResponseXML {
 
 			case TransferRequestTag.ForgetLoginPwd:
 				return forgetLoginPwd();
-
+				
+			case TransferRequestTag.UpdateVersion:
+				return updateVersion();
+				
 			case TransferRequestTag.SignIn:
 				return signIn();
 
@@ -151,6 +155,9 @@ public class ParseResponseXML {
 				
 			case TransferRequestTag.UploadSignImage:
 				return upLoadSignImageAction();
+				
+			case TransferRequestTag.RateType:
+				return rateType();
 			}
 
 		} catch (XmlPullParserException e) {
@@ -206,6 +213,50 @@ public class ParseResponseXML {
 		return respMap;
 	}
 
+	private static Object rateType() throws XmlPullParserException, IOException {
+		HashMap<String, Object> respMap = null;
+
+		ArrayList<RateModel> list = new ArrayList<RateModel>();
+		RateModel model = null;
+		XmlPullParser parser = Xml.newPullParser();
+		parser.setInput(inStream, "UTF-8");
+		int eventType = parser.getEventType();
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			switch (eventType) {
+			case XmlPullParser.START_TAG:
+				if ("EPOSPROTOCOL".equalsIgnoreCase(parser.getName())) {
+					respMap = new HashMap<String, Object>();
+				} else if ("RSPCOD".equalsIgnoreCase(parser.getName())) {
+					respMap.put("RSPCOD", parser.nextText());
+				} else if ("PHONENUMBER".equalsIgnoreCase(parser.getName())) {
+					respMap.put("PHONENUMBER", parser.nextText());
+				} else if ("RSPMSG".equalsIgnoreCase(parser.getName())) {
+					respMap.put("RSPMSG", parser.nextText());
+				} else if ("PACKAGEMAC".equalsIgnoreCase(parser.getName())) {
+					respMap.put("PACKAGEMAC", parser.nextText());
+				} else if ("TRANDETAIL".equalsIgnoreCase(parser.getName())) {
+					model = new RateModel();
+				} else if ("IDFCHANNEL".equalsIgnoreCase(parser.getName())) {
+					model.setIDFCHANNEL(parser.nextText());
+				} else if ("IDFID".equalsIgnoreCase(parser.getName())) {
+					model.setIDFID(parser.nextText());
+				} else if ("DFEERAT".equalsIgnoreCase(parser.getName())) {
+					model.setDFEERAT(parser.nextText());
+				} 
+				break;
+			case XmlPullParser.END_TAG:
+				if ("TRANDETAIL".equalsIgnoreCase(parser.getName())) {
+					list.add(0, model); // 服务器返回顺序不对，这里进行倒序
+				} else if ("TRANDETAILS".equalsIgnoreCase(parser.getName())) {
+					respMap.put("list", list);
+				}
+				break;
+			}
+
+			eventType = parser.next();
+		}
+		return respMap;
+	}
 	private static Object register() throws XmlPullParserException, IOException {
 		HashMap<String, String> respMap = null;
 
@@ -431,6 +482,38 @@ public class ParseResponseXML {
 	private static Object upLoadImages(String reponseStr) throws JSONException {
 		HashMap<String, String> respMap = StringUtil.JSONObject2Map(new JSONObject(reponseStr));
 
+
+		return respMap;
+	}
+	
+	private static Object updateVersion() throws XmlPullParserException, IOException {
+		HashMap<String, Object> respMap = null;
+
+		XmlPullParser parser = Xml.newPullParser();
+		parser.setInput(inStream, "UTF-8");
+		int eventType = parser.getEventType();
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			switch (eventType) {
+			case XmlPullParser.START_TAG:
+				if ("root".equalsIgnoreCase(parser.getName())) {
+					respMap = new HashMap<String, Object>();
+				} 
+				
+				if ("version".equals(parser.getName())) {
+					respMap.put("version", Integer.parseInt(parser.nextText()));
+
+				} else if ("url".equals(parser.getName())) {
+					respMap.put("url", parser.nextText());
+				} else if ("des".equals(parser.getName())) {
+					respMap.put("des", parser.nextText());
+					
+				}
+				break;
+
+			}
+
+			eventType = parser.next();
+		}
 
 		return respMap;
 	}

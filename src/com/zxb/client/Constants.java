@@ -4,7 +4,7 @@ package com.zxb.client;
 public class Constants {
 
 	// 当前系统的版本号
-	public static final int VERSION = 3;
+	public static final int VERSION = 1;
 
 	public static final String AESKEY = "dynamicode";
 
@@ -35,6 +35,8 @@ public class Constants {
 	public static final String ACTION_ZXB_SUCCESS = "ACTION_ZXB_SUCCESS";
 	public static final String ACTION_ZXB_SWIPFINISHED = "ACTION_ZXB_SWIPFINISHED";
 
+	public static final String ip = "http://211.147.87.20:8092/Vpm/";
+	
 	public static final String SIGNIMAGESPATH = APPFILEPATH + "/signImages/";
 	public static final String kTRACEAUDITNUM = "kTRACEAUDITNUM";
 

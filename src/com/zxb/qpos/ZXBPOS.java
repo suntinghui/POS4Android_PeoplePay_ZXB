@@ -10,6 +10,7 @@ import com.fncat.xswipe.controller.POSManage;
 import com.fncat.xswipe.controller.StatusListener;
 import com.zxb.activity.BaseActivity;
 import com.zxb.activity.PwdInputActivity;
+import com.zxb.activity.SearchAndSwipeActivity;
 import com.zxb.client.AppDataCenter;
 import com.zxb.client.AppInit;
 import com.zxb.client.Constants;
@@ -85,6 +86,9 @@ public class ZXBPOS {
 		@Override
 		public void onPlugout() {
 			Toast.makeText(BaseActivity.getTopActivity(), "设备已拔出", Toast.LENGTH_SHORT).show();
+			if(BaseActivity.getTopActivity() instanceof SearchAndSwipeActivity){
+				BaseActivity.getTopActivity().finish();
+			}
 		}
 		
 	};

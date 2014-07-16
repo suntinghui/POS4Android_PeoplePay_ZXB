@@ -135,7 +135,7 @@ public class PwdInputActivity extends BaseActivity implements OnClickListener {
 		sb.append(intent.getStringExtra("TSEQNO"));
 		sb.append(intent.getStringExtra("TTXNTM"));
 		sb.append(intent.getStringExtra("TTXNDT"));
-		sb.append(intent.getStringExtra("PID"));
+		sb.append(StringUtil.asciiToHex(intent.getStringExtra("PID").replace("E0", "")));
 
 		return sb.toString();
 	}
@@ -148,7 +148,7 @@ public class PwdInputActivity extends BaseActivity implements OnClickListener {
 		sb.append(intent.getStringExtra("TSeqNo_B"));
 		sb.append(intent.getStringExtra("TTxnTm_B"));
 		sb.append(intent.getStringExtra("TTxnDt_B"));
-		sb.append(intent.getStringExtra("PID"));
+		sb.append(StringUtil.asciiToHex(intent.getStringExtra("PID").replace("E0", "")));
 
 		return sb.toString();
 	}
@@ -161,7 +161,7 @@ public class PwdInputActivity extends BaseActivity implements OnClickListener {
 		sb.append(intent.getStringExtra("TSeqNo_B"));
 		sb.append(intent.getStringExtra("TTxnTm_B"));
 		sb.append(intent.getStringExtra("TTxnDt_B"));
-		sb.append(intent.getStringExtra("PID"));
+		sb.append(StringUtil.asciiToHex(intent.getStringExtra("PID").replace("E0", "")));
 
 		return sb.toString();
 	}
@@ -174,7 +174,7 @@ public class PwdInputActivity extends BaseActivity implements OnClickListener {
 		sb.append(intent.getStringExtra("TSeqNo_B"));
 		sb.append(intent.getStringExtra("TTxnTm_B"));
 		sb.append(intent.getStringExtra("TTxnDt_B"));
-		sb.append(intent.getStringExtra("PID"));
+		sb.append(StringUtil.asciiToHex(intent.getStringExtra("PID").replace("E0", "")));
 
 		return sb.toString();
 	}
@@ -215,6 +215,7 @@ public class PwdInputActivity extends BaseActivity implements OnClickListener {
 		tempMap.put("CHECKY", intent.getStringExtra("CHECKY")); // 纵坐标
 		tempMap.put("TTXNTM", intent.getStringExtra("TTXNTM")); // 交易时间
 		tempMap.put("TTXNDT", intent.getStringExtra("TTXNDT")); // 交易日期
+		tempMap.put("IDFID", intent.getStringExtra("IDFID")); // 扣率ID
 		tempMap.put("PSAMCARDNO", intent.getStringExtra("PID")); // PSAM卡号
 																	// "UN201410000046"
 		tempMap.put("MAC", AppDataCenter.MAC[0].substring(0, 8)); // MAC

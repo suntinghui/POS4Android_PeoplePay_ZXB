@@ -1,7 +1,9 @@
 package com.zxb.client;
 
 import android.annotation.SuppressLint;
+
 import java.util.HashMap;
+
 
 @SuppressLint("UseSparseArrays")
 public class TransferRequestTag {
@@ -48,6 +50,9 @@ public class TransferRequestTag {
 	public static final int CardCard = 38; // 卡卡转账
 	public static final int CreditCard = 39; // 信用卡还款
 	public static final int UploadSignImage = 40; // 上传签购单
+	public static final int UpdateVersion = 41; 
+	public static final int RateType = 42; 
+	public static final int RateInstruction = 43; 
 	
 	private static HashMap<Integer, String> requestTagMap = null;
 
@@ -55,52 +60,54 @@ public class TransferRequestTag {
 		if (null == requestTagMap) {	
 			requestTagMap = new HashMap<Integer, String>();
 
-			requestTagMap.put(Login, "http://211.147.87.29:8092/Vpm/199002.tranm");// http://211.147.87.24:8092/posm/199002.tran5
-			//http://211.147.87.29:8092/Vpm/199002.tranm
-			requestTagMap.put(Register, "http://211.147.87.29:8092/Vpm/199001.tranm");
-			requestTagMap.put(ModifyLoginPwd, "http://211.147.87.29:8092/Vpm/199003.tranm");
-			requestTagMap.put(ForgetLoginPwd, "http://211.147.87.29:8092/Vpm/199004.tranm");
-			requestTagMap.put(SignIn, "http://211.147.87.29:8092/Vpm/199020.tranm");
-			requestTagMap.put(Consume, "http://211.147.87.29:8092/Vpm/199005.tranm");
+			requestTagMap.put(Login, Constants.ip+"199002.tranm");// http://211.147.87.24:8092/posm/199002.tran5
+			//http://211.147.87.20:8092/Vpm/199002.tranm
+			requestTagMap.put(Register, Constants.ip+"199001.tranm");
+			requestTagMap.put(ModifyLoginPwd, Constants.ip+"199003.tranm");
+			requestTagMap.put(ForgetLoginPwd, Constants.ip+"199004.tranm");
+			requestTagMap.put(SignIn, Constants.ip+"199020.tranm");
+			requestTagMap.put(Consume, Constants.ip+"199005.tranm");
 			requestTagMap.put(ConsumeCancel, "http://211.147.87.23:8088/posp/199006.tran");
 			requestTagMap.put(BalanceQuery, "http://211.147.87.23:8088/posp/199007.tran");
-			requestTagMap.put(FlowQuery, "http://211.147.87.29:8092/Vpm/199008.tranm"); // 流水查询
+			requestTagMap.put(FlowQuery, Constants.ip+"199008.tranm"); // 流水查询
 			requestTagMap.put(CreditCardApply, "http://211.147.87.23:8080/posp/199010.tran");// 信用卡额度申请
 			requestTagMap.put(ClearQuery, "http://211.147.87.23:8080/posp/199009.tran");
 			requestTagMap.put(AppCommend, "http://211.147.87.24:8092/posm/199011.tran5");
-			requestTagMap.put(ReferenceMsg, "http://211.147.87.29:8092/Vpm/199012.tranm");
+			requestTagMap.put(ReferenceMsg, Constants.ip+"199012.tranm");
 			requestTagMap.put(ShareTransfer, "http://211.147.87.24:8092/posm/199015.tran5");
 			requestTagMap.put(ExaminePhone, "http://211.147.87.24:8092/posm/199016.tran5");
 			requestTagMap.put(CompareOldPwd, "http://211.147.87.24:8092/posm/199017.tran5");
-			requestTagMap.put(SmsSend, "http://211.147.87.29:8092/Vpm/199018.tranm");
-			requestTagMap.put(SmsCheck, "http://211.147.87.29:8092/Vpm/199019.tranm");
-			requestTagMap.put(MerchantQuery, "http://211.147.87.29:8092/Vpm/199022.tranm");
+			requestTagMap.put(SmsSend, Constants.ip+"199018.tranm");
+			requestTagMap.put(SmsCheck, Constants.ip+"199019.tranm");
+			requestTagMap.put(MerchantQuery, Constants.ip+"199022.tranm");
 			
-			requestTagMap.put(CashCharge, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=addTransaction");
-			requestTagMap.put(GetCashCharge, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getTransaction");
-			requestTagMap.put(CashDelete, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=delTransaInfo");
+			requestTagMap.put(CashCharge, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=addTransaction");
+			requestTagMap.put(GetCashCharge, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getTransaction");
+			requestTagMap.put(CashDelete, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=delTransaInfo");
 
-			requestTagMap.put(LoadUpHead, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=setHeadImg");
-			requestTagMap.put(GetDownLoadHead, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getHeadImg");
-			requestTagMap.put(LoadUpStreetImg, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=setStreetImg");
-			requestTagMap.put(GetDownLoadStreetImg, "http://229.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getStreetImg");
-			// 229.194.46.46  194.46.46
-			requestTagMap.put(GetProvinceName, "http://211.147.87.29:8092/Vpm/199031.tranm");
-			requestTagMap.put(GetCityName, "http://211.147.87.29:8092/Vpm/199032.tranm");
-			requestTagMap.put(GetBank, "http://211.147.87.29:8092/Vpm/199035.tranm");
-			requestTagMap.put(GetBankBranch, "http://211.147.87.29:8092/Vpm/199034.tranm");
-			requestTagMap.put(UpLoadImage, "http://211.147.87.29:8092/Vpm/199021.tran");
-			requestTagMap.put(CheckTicket, "http://211.147.87.29:8092/Vpm/199036.tranm");
-			requestTagMap.put(SendTicket, "http://211.147.87.29:8092/Vpm/199037.tranm");
-			requestTagMap.put(DrawMoney, "http://211.147.87.29:8092/Vpm/199025.tranm");
-			requestTagMap.put(MyAccount, "http://211.147.87.29:8092/Vpm/199026.tranm");
-			requestTagMap.put(PhoneRecharge, "http://211.147.87.29:8092/Vpm/708103.tranp");
-			requestTagMap.put(Authentication, "http://211.147.87.29:8092/Vpm/199030.tranm");
-			requestTagMap.put(CardCard, "http://211.147.87.29:8092/Vpm/708101.tranm");
-			requestTagMap.put(CreditCard, "http://211.147.87.29:8092/Vpm/708102.tranm");
-			requestTagMap.put(UploadSignImage, "http://211.147.87.29:8092/Vpm/199010.tranm");
+			requestTagMap.put(UpdateVersion, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getVersion&type=2");
+			//http://192.168.4.126:8080/zfb/mpos/transProcess.do?operationId=getVersion&type=2
 			
-			
+			requestTagMap.put(LoadUpHead, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=setHeadImg");
+			requestTagMap.put(GetDownLoadHead, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getHeadImg");
+			requestTagMap.put(LoadUpStreetImg, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=setStreetImg");
+			requestTagMap.put(GetDownLoadStreetImg, "http://220.194.46.46:8080/zfb/mpos/transProcess.do?operationId=getStreetImg");
+			// 220.194.46.46    116.228.88.115:18080
+			requestTagMap.put(GetProvinceName, Constants.ip+"199031.tranm");
+			requestTagMap.put(GetCityName, Constants.ip+"199032.tranm");
+			requestTagMap.put(GetBank, Constants.ip+"199035.tranm");
+			requestTagMap.put(GetBankBranch, Constants.ip+"199034.tranm");
+			requestTagMap.put(UpLoadImage, Constants.ip+"199021.tran");
+			requestTagMap.put(CheckTicket, Constants.ip+"199036.tranm");
+			requestTagMap.put(SendTicket, Constants.ip+"199037.tranm");
+			requestTagMap.put(DrawMoney, Constants.ip+"199025.tranm");
+			requestTagMap.put(MyAccount, Constants.ip+"199026.tranm");
+			requestTagMap.put(PhoneRecharge, Constants.ip+"708103.tranp");
+			requestTagMap.put(Authentication, Constants.ip+"199030.tranm");
+			requestTagMap.put(CardCard, Constants.ip+"708101.tranm");
+			requestTagMap.put(CreditCard, Constants.ip+"708102.tranm");
+			requestTagMap.put(UploadSignImage, Constants.ip+"199010.tranm");
+			requestTagMap.put(RateType, Constants.ip+"199038.tranm");
 			
 			// 192.168.4.115:8080  测试服务器地址
 			// 59.49.29.154:8586 外网

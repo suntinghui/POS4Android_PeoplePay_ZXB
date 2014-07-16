@@ -10,6 +10,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.com.fmsh.util.FM_Bytes;
 
 import com.fncat.xswipe.controller.ErrorCode;
 import com.zxb.R;
@@ -81,7 +83,13 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 		
 		iv_device = (ImageView) findViewById(R.id.iv_device);
 		
-		doAction();
+		if(ZXBPOS.getPOSManage().isPluged()){
+			doAction();
+		}else{
+			Toast.makeText(this, "请先插入设备", Toast.LENGTH_SHORT).show();
+			this.finish();
+		}
+		
 	}
 
 	private void doAction() {
@@ -180,7 +188,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 				case ErrorCode.SUCCESS:
 					ZXBPOS.checkBattery();
 					
-					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
+//					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
+					tid = FM_Bytes.bytesToHexString(AppDataCenter.deviceId);
 					pid = tid;
 
 					signAction();
@@ -274,8 +283,8 @@ public class SearchAndSwipeActivity extends BaseActivity implements OnClickListe
 				switch (msg.what) {
 				case ErrorCode.SUCCESS:
 					ZXBPOS.checkBattery();
-					
-					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
+//					tid = ByteUtil.byte2hex(AppDataCenter.deviceId);
+					tid = FM_Bytes.bytesToHexString(AppDataCenter.deviceId);
 					pid = tid;
 					
 					intent.putExtra("TID", tid);

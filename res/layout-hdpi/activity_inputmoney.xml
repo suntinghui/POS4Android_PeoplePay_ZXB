@@ -83,7 +83,16 @@
         android:textColor="@drawable/text_blue_gray"
         android:textSize="18sp"
         android:layout_centerInParent="true"
+        
          />
+        
+        <Button android:id="@+id/btn_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rate_instruction_n"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dip"/>
         
     </RelativeLayout>
 
